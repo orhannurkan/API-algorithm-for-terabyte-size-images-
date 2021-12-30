@@ -26,12 +26,10 @@ The Function in the algorithm
 ![Function](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/blob/main/function.jpg)
 
 ## 5 - Merge pool parts (for %800 better performance and less resources usage): 
-We predict pools from 224x244 pixel images, so sometimes a part of a pool may be inside this 224x224 pixel image. However, other parts of that pool may be inside different images. Instead of overlapping the 224x224 pixel images by shifting them by 50%, we create a separate list for the pool parts coming to the edges of the images and merge this list at the end. 
-
-As seen in the animation below, the shifting operation to identify the pools at the edges and corners takes 8 times longer time.
+We predict pools from 224x244 pixel images, so sometimes a part of a pool may be inside this 224x224 pixel image. However, other parts of that pool may be inside different images. As seen in the animation below, the shifting operation to identify the pools at the edges and corners takes 8 times longer time.
 
 ![overlapping](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/blob/main/overlapping.gif)
 
-By checking the coordinates of the pool parts, the pool parts will be merged by the API if they are from the same coordinates / pool.
+Instead of overlapping the 224x224 pixel images by shifting them by 50%, we create a separate list for the pool parts coming to the edges of the images and merge this list at the end. By checking the coordinates of the pool parts, the pool parts will be merged by the API if they are from the same coordinates / pool.
 In this way it is up to 8 times faster, both the DB traffic is reduced, the AI model is called 8 times less, system resources are not used unnecessarily, a single pool is created from its own parts and then saved as a whole to the DB. 
 
