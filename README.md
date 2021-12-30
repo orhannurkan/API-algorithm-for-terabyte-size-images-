@@ -1,3 +1,4 @@
+Note: These project files and details are not shared because they belong to a company I worked for before. However, I share with you my approach that can be beneficial to everyone. 
 # API algorithm to apply object detection model to terabyte size satellite images with 800% better performance and 8 times less resources usage
 Suppose we train our object detection model to find swimming pools.
 
