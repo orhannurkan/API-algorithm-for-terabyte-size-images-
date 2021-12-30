@@ -27,7 +27,7 @@ The Function in the algorithm
 
 ## 5 - Merge pool parts (for %800 better performance and less resources usage): 
 We predict pools from 224x244 pixel images, so sometimes a part of a pool may be inside this 224x224 pixel image. However, other parts of that pool may be inside different images. Instead of overlapping the 224x224 pixel images by shifting them by 50%, we create a separate list for the pool parts coming to the edges of the images and merge this list at the end. 
-
+Shifting to determine the pools on the sides and corners is 8 times longer process.
 ![overlapping](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/blob/main/overlapping.gif)
 
 By checking the coordinates of the pool parts, the pool parts will be merged by the API if they are from the same coordinates / pool.
