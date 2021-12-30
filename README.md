@@ -2,12 +2,12 @@
 Suppose we train our object detection model to find swimming pools.
 
 Algorithm of the API - model input size 224x224 pixel image
-![Algorithm](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/Algorithm.jpg)
+![algorithm](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/algorithm.jpg)
 Input format of the API : {[latitude_of_top_left, longitude_of_top_left, latitude_of_right_bottom, longitude_of_right_bottom]}
 
 ## 1 - Gets Coordinates : 
 API gets coordinates of the selected zone as parameters. For example (in the satellite image below), [50.47, 3.91, 50.43, 3.96] here the first two elements of the input list are latitude-longitude of the left top corner of the selected zone and the last two elements of the input list are latitude-longitude of the right bottom corner of the selected zone. 
-![Algorithm](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/algorithm.jpg)
+![coordinates](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/coordinates.jpg)
 
 ## 2 - Calculates Zone Image Size and > 300 MB : 
 Then it calculates image size for this zone and checks whether it is less than 300MB or not. If the image of the zone is more than 300MB we will divide it to 300MB sectors. We can set any limit instead of 300MB but the most important detail is to have 224x224 pictures in that sector.
@@ -27,4 +27,4 @@ The Function in the algorithm
 ## 5 - Merge pool parts (for %800 better performance and less resources usage): 
 We predict pools from 224x244 pixel images, so sometimes a part of a pool may be inside this 224x224 pixel image. However, other parts of that pool may be inside different images. Instead of overlapping the 224x224 pixel images by shifting them by 50%, we create a separate list for the pool parts coming to the edges of the images and merge this list at the end. By checking the coordinates of the pool parts, the pool parts will be merged by the API if they are from the same coordinates / pool.
 In this way it is up to 8 times faster, both the DB traffic is reduced, the AI model is called 8 times less, system resources are not used unnecessarily, a single pool is created from its own parts and then saved as a whole to the DB. 
-![overlapping](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/overlapping.jpg)
+![overlapping](https://github.com/orhannurkan/API-algorithm-for-terabyte-size-images-/overlapping.gif)
